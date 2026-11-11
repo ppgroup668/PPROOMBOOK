@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="bg-stone-900 text-stone-200 text-xs px-4 py-1.5 flex flex-wrap items-center justify-between gap-2 border-b border-stone-800">
         <div className="flex items-center gap-2">
           <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span className="font-medium text-stone-300">BookJor 全端預約系統</span>
+          <span className="font-medium text-stone-300">BOOK LA 會議室預約系統</span>
           <span className="hidden sm:inline text-stone-500">|</span>
           <span className="text-amber-300 font-semibold flex items-center gap-1">
             <Sparkles className="w-3 h-3" /> 預約全額免費
@@ -96,12 +96,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="text-xl font-bold tracking-tight text-stone-900">BookJor</span>
+              <span className="text-xl font-bold tracking-tight text-stone-900">BOOK LA</span>
               <span className="text-xs px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">
                 Free
               </span>
             </div>
-            <p className="text-[11px] text-stone-500 -mt-0.5">空間與暗室預訂系統</p>
+            <p className="text-[11px] text-stone-500 -mt-0.5">會議室預約平台</p>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
             }`}
           >
-            空間房型
+            會議室列表
           </button>
 
           {currentUser?.role === 'member' && (
@@ -249,7 +249,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 activeView === 'home' ? 'bg-stone-100 text-stone-900 font-semibold' : 'text-stone-700'
               }`}
             >
-              空間房型首頁
+              會議室首頁
             </button>
 
             {currentUser?.role === 'member' && (

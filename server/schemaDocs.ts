@@ -1,5 +1,5 @@
 export const SCHEMA_DOCS = {
-  title: 'BookJor 空間預約系統 — 資料庫 Schema 設計與部屬規範',
+  title: 'BOOK LA 會議室預約系統 — 資料庫 Schema 設計與部屬規範',
   description: '此規格提供 SQLite 關聯式資料庫結構、MongoDB Mongoose 結構、以及 Node.js Express 串接與部屬手冊。',
   sqliteDDL: `
 -- ==========================================
@@ -182,11 +182,11 @@ export const Booking = mongoose.model<IBooking>('Booking', BookingSchema);
 2. 使用 PM2 或 Docker 守護 Node.js 程序：
    $ npm start
    或使用 PM2:
-   $ pm2 start "npm start" --name "bookjor-app"
+   $ pm2 start "npm start" --name "bookla-app"
 
 【預設系統帳號】
 - 管理員帳號 (Admin)：
-  帳號：admin@bookjor.com
+  帳號：admin@bookla.com
   密碼：admin123
   權限：房型新增/編輯/下架、預約全表審核與手動調度
 - 一般會員帳號 (Member)：

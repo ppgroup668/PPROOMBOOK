@@ -87,7 +87,7 @@ export default function App() {
   // Quick Login helper
   const handleQuickLogin = async (role: 'admin' | 'member') => {
     try {
-      const email = role === 'admin' ? 'admin@bookjor.com' : 'user@example.com';
+      const email = role === 'admin' ? 'admin@bookla.com' : 'user@example.com';
       const password = role === 'admin' ? 'admin123' : 'user123';
       const res = await api.login({ email, password });
       authStorage.setToken(res.token);
@@ -117,7 +117,7 @@ export default function App() {
     }
     if (view === 'admin' && currentUser?.role !== 'admin') {
       // Auto assist user to switch to admin test or show prompt
-      if (confirm('此功能需管理員權限，是否立即以測試管理員帳號 (admin@bookjor.com) 登入？')) {
+      if (confirm('此功能需管理員權限，是否立即以測試管理員帳號 (admin@bookla.com) 登入？')) {
         handleQuickLogin('admin');
         return;
       }
@@ -167,18 +167,18 @@ export default function App() {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200 mb-2">
                     <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                    全開放預約空間
+                    全開放預約會議室
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
-                    精選空間與暗室房型
+                    精選會議室列表 (會議室 A 至 會議室 E)
                   </h2>
                   <p className="text-xs sm:text-sm text-stone-500 mt-1">
-                    挑選符合您創作、教學或會議需求的理想環境，完全免費享有專業設施。
+                    精選會議室 A、B、C、D、E，支援董事決策會議、敏捷專案研討、小組頭腦風暴與大型培訓，預約全額免費。
                   </p>
                 </div>
 
                 <div className="text-xs text-stone-500">
-                  共顯示 <strong className="text-stone-900">{filteredRooms.length}</strong> 間空間房型
+                  共顯示 <strong className="text-stone-900">{filteredRooms.length}</strong> 間會議室
                 </div>
               </div>
 

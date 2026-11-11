@@ -269,10 +269,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">
-            BookJor 空間管理員控制台
+            BOOK LA 會議室管理員控制台
           </h1>
           <p className="text-xs sm:text-sm text-stone-400 mt-1">
-            管理房型暗室上架、即時審核全免預約訂單、監控空間檔期與查詢資料庫結構
+            管理會議室 A 至會議室 E 上架、即時審核全免預約訂單、監控檔期與查詢資料庫結構
           </p>
         </div>
 
@@ -333,7 +333,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
 
           <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs">
             <div className="flex items-center justify-between text-stone-500 text-xs font-medium">
-              <span>開放中空間 / 房型</span>
+              <span>開放中會議室</span>
               <Layers className="w-4 h-4 text-purple-600" />
             </div>
             <div className="mt-2 flex items-baseline gap-2">
@@ -378,7 +378,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
           }`}
         >
           <Layers className="w-4 h-4 text-purple-600" />
-          房型／暗室管理 ({rooms.length})
+          會議室管理 ({rooms.length})
         </button>
 
         <button
@@ -551,9 +551,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-xl font-bold text-stone-900">空間與暗室房型列表</h2>
+              <h2 className="text-xl font-bold text-stone-900">會議室列表 (會議室 A 至 會議室 E)</h2>
               <p className="text-xs text-stone-500">
-                新增、編輯、下架或維護各類攝影暗室、會議室與錄音空間
+                新增、編輯、下架或維護各類高階會議室、專案討論室與多功能視訊空間
               </p>
             </div>
 
@@ -562,7 +562,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
               className="px-5 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer active:scale-98"
             >
               <Plus className="w-4 h-4 text-emerald-400" />
-              新增房型 / 暗室
+              新增會議室
             </button>
           </div>
 

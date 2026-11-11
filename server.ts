@@ -116,7 +116,7 @@ app.post('/api/auth/register', (req: Request, res: Response) => {
     );
 
     return res.status(201).json({
-      message: '註冊成功！歡迎使用 BookJor 空間預約系統',
+      message: '註冊成功！歡迎使用 BOOK LA 會議室預約系統',
       token,
       user: sanitizeUser(newUser),
     });
@@ -517,7 +517,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`> BookJor 空間預約系統全端伺服器運行於: http://localhost:${PORT}`);
+    console.log(`> BOOK LA 會議室預約系統全端伺服器運行於: http://localhost:${PORT}`);
   });
 }
 

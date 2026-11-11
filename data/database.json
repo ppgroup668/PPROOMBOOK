@@ -1,0 +1,223 @@
+{
+  "users": [
+    {
+      "id": "usr_admin",
+      "name": "系統管理員 (Admin)",
+      "email": "admin@bookla.com",
+      "phone": "0912-345-678",
+      "passwordHash": "$2b$10$rEgZh6yspCp5BLOWPJs27eGoneOzd5hsmQeKB34CiDxQD4/xnIzBS",
+      "role": "admin",
+      "createdAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "usr_member1",
+      "name": "陳小華 (Member)",
+      "email": "user@example.com",
+      "phone": "0988-765-432",
+      "passwordHash": "$2b$10$lwSNI5hHlOU4m5ceaaN8ze4jLNe3.LzCjCaxSS8hm.vv539RrLINC",
+      "role": "member",
+      "createdAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "usr_member2",
+      "name": "林美玲",
+      "email": "meiling@example.com",
+      "phone": "0922-111-222",
+      "passwordHash": "$2b$10$lwSNI5hHlOU4m5ceaaN8ze4jLNe3.LzCjCaxSS8hm.vv539RrLINC",
+      "role": "member",
+      "createdAt": "2026-11-11T07:00:18.619Z"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "rm_meeting_a",
+      "name": "會議室 A",
+      "category": "高階會議室",
+      "description": "大氣沉穩的現代企業董事會議室，配備 85 吋 4K 觸控電子白板、Bose 陣列視訊追蹤麥克風、人體工學皮椅與高速光纖 Wi-Fi 6，適合跨國視訊洽談與決策會議。",
+      "capacity": 16,
+      "area": "55 平方米 (約 16.6 坪)",
+      "amenities": [
+        "85 吋 4K 觸控電子白板",
+        "4K 廣角視訊追蹤鏡頭",
+        "無線投影傳輸器",
+        "高速 Wi-Fi 6",
+        "Nespresso 膠囊咖啡",
+        "獨立隔音門窗"
+      ],
+      "price": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+      "status": "available",
+      "availableTimeSlots": [
+        "09:00 - 11:00",
+        "11:00 - 13:00",
+        "14:00 - 16:00",
+        "16:00 - 18:00",
+        "19:00 - 21:00"
+      ],
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "rm_meeting_b",
+      "name": "會議室 B",
+      "category": "專案會議室",
+      "description": "為敏捷專案小組設計的高效協作空間，配備 65 吋 4K 顯示螢幕、全落地式雙面磁吸玻璃白板、無線傳屏與多功能擴充接口，滿足團隊日常研討與腦力激盪。",
+      "capacity": 10,
+      "area": "35 平方米 (約 10.5 坪)",
+      "amenities": [
+        "65 吋 4K 顯示螢幕",
+        "全落地式雙面玻璃白板",
+        "無線螢幕分享器",
+        "人體工學辦公椅",
+        "多功能電源插座",
+        "冷熱飲用水機"
+      ],
+      "price": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
+      "status": "available",
+      "availableTimeSlots": [
+        "09:00 - 11:00",
+        "11:00 - 13:00",
+        "14:00 - 16:00",
+        "16:00 - 18:00",
+        "19:00 - 21:00"
+      ],
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "rm_meeting_c",
+      "name": "會議室 C",
+      "category": "小組討論室",
+      "description": "精緻舒適的頭腦風暴與小組研討空間，配備 55 吋智慧螢幕、移動式白板、便利貼套件組與靈活拼裝桌椅，為團隊注入無限創意靈感。",
+      "capacity": 6,
+      "area": "24 平方米 (約 7.2 坪)",
+      "amenities": [
+        "55 吋智慧電視螢幕",
+        "移動式磁吸白板",
+        "研討便利貼套件組",
+        "彈性組合拼接桌椅",
+        "超靜音獨立空調",
+        "高速無線網路"
+      ],
+      "price": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=1200&q=80",
+      "status": "available",
+      "availableTimeSlots": [
+        "09:00 - 11:00",
+        "11:00 - 13:00",
+        "14:00 - 16:00",
+        "16:00 - 18:00",
+        "19:00 - 21:00"
+      ],
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "rm_meeting_d",
+      "name": "會議室 D",
+      "category": "視訊會議室",
+      "description": "專為線上遠端視訊與跨國電話會議打造的頂級聲學靜音室，搭載專業定向收音麥克風陣列、抗干擾雙螢幕顯示與全遮光隔音吸音壁板。",
+      "capacity": 8,
+      "area": "30 平方米 (約 9 坪)",
+      "amenities": [
+        "專用視訊會議主機",
+        "4K 雙鏡頭自動跟焦",
+        "天花板矩陣收音麥克風",
+        "聲學吸音隔音牆板",
+        "抗眩光防疲勞照明",
+        "Type-C 萬用擴充塢"
+      ],
+      "price": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80",
+      "status": "available",
+      "availableTimeSlots": [
+        "09:00 - 11:00",
+        "11:00 - 13:00",
+        "14:00 - 16:00",
+        "16:00 - 18:00",
+        "19:00 - 21:00"
+      ],
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "rm_meeting_e",
+      "name": "會議室 E",
+      "category": "大型多功能室",
+      "description": "寬敞開揚的多功能大型培訓與論壇會議廳，配備 120 吋電動高畫質投影布幕、雷射高清投影系統、JBL 無線手持麥克風，可彈性佈置為課堂式或劇場式。",
+      "capacity": 25,
+      "area": "75 平方米 (約 22.7 坪)",
+      "amenities": [
+        "120 吋電動高畫質投影幕",
+        "雷射高流明投影機",
+        "JBL 無線麥克風 x2",
+        "可折疊移動培訓桌椅組",
+        "專用演講台與音響系統",
+        "專屬茶水吧檯"
+      ],
+      "price": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80",
+      "status": "available",
+      "availableTimeSlots": [
+        "09:00 - 11:00",
+        "11:00 - 13:00",
+        "14:00 - 16:00",
+        "16:00 - 18:00",
+        "19:00 - 21:00"
+      ],
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "BK20261110-8021",
+      "roomId": "rm_meeting_a",
+      "roomName": "會議室 A",
+      "userId": "usr_member1",
+      "userName": "陳小華 (Member)",
+      "userEmail": "user@example.com",
+      "userPhone": "0988-765-432",
+      "date": "2026-11-10",
+      "timeSlot": "14:00 - 16:00",
+      "attendeesCount": 6,
+      "notes": "季度跨部門戰略評估會議，需準備無線投影。",
+      "status": "confirmed",
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "BK20261111-9314",
+      "roomId": "rm_meeting_b",
+      "roomName": "會議室 B",
+      "userId": "usr_member1",
+      "userName": "陳小華 (Member)",
+      "userEmail": "user@example.com",
+      "userPhone": "0988-765-432",
+      "date": "2026-11-11",
+      "timeSlot": "09:00 - 11:00",
+      "attendeesCount": 8,
+      "notes": "產品開發進度研討，需使用白板。",
+      "status": "confirmed",
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    },
+    {
+      "id": "BK20261113-1045",
+      "roomId": "rm_meeting_d",
+      "roomName": "會議室 D",
+      "userId": "usr_member2",
+      "userName": "林美玲",
+      "userEmail": "meiling@example.com",
+      "userPhone": "0922-111-222",
+      "date": "2026-11-13",
+      "timeSlot": "16:00 - 18:00",
+      "attendeesCount": 4,
+      "notes": "遠端客戶跨國視訊洽談，自備筆電。",
+      "status": "confirmed",
+      "createdAt": "2026-11-11T07:00:18.619Z",
+      "updatedAt": "2026-11-11T07:00:18.619Z"
+    }
+  ]
+}

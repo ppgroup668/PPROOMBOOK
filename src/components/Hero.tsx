@@ -30,21 +30,21 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Pill Tag */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-semibold mb-6 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-emerald-600 animate-spin-slow" />
-          全站空間預約 100% 全免費體驗．即時確認檔期
+          BOOK LA 會議室預約 100% 全免費體驗．即時確認檔期
         </div>
 
         {/* Headline */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-stone-900 max-w-4xl mx-auto leading-[1.15]">
-          為創意與專注打造的 <br className="hidden sm:inline" />
+          為高效商務與團隊協作打造的 <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-900 via-emerald-800 to-stone-700">
-            極致空間預約平台
+            BOOK LA 會議室預約平台
           </span>
         </h1>
 
         {/* Subtitle */}
         <p className="mt-5 text-base sm:text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
-          精選專業黑白暗室、會議室、Podcast 錄音間與個人專注工作艙。
-          靈活挑選日期時段，無需手續費與押金，隨享頂級創作與商務體驗。
+          提供會議室 A 至會議室 E 多元規格，配備 4K 觸控白板、遠端視訊系統與全套簡報設備。
+          靈活挑選日期時段，零收費零押金，一鍵保留專屬會議空間。
         </p>
 
         {/* Search & Filter Bar */}
@@ -55,7 +55,7 @@ export const Hero: React.FC<HeroProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="搜尋房型名稱、暗室、設備（如：Beseler、4K、投影）..."
+              placeholder="搜尋會議室名稱、設備（如：4K、視訊追蹤、觸控白板、投影）..."
               className="w-full pl-10 pr-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition"
             />
           </div>
@@ -66,7 +66,7 @@ export const Hero: React.FC<HeroProps> = ({
               className="w-full md:w-auto px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-sm font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2"
             >
               <CalendarCheck className="w-4 h-4 text-emerald-400" />
-              瀏覽所有空間
+              瀏覽會議室列表
             </button>
           </div>
         </div>
@@ -81,7 +81,7 @@ export const Hero: React.FC<HeroProps> = ({
                 : 'bg-white hover:bg-stone-100 text-stone-600 border border-stone-200'
             }`}
           >
-            全部空間
+            全部會議室
           </button>
           {categories.map((cat) => (
             <button

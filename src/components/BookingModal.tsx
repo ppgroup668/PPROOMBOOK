@@ -452,7 +452,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   rows={3}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="例如：需借用 Beseler 45M 放大機沖印黑白底片、需投影簡報..."
+                  placeholder="例如：需使用 4K 視訊會議主機、無線投影傳輸器、需白板筆與茶水服務..."
                   className="w-full px-3.5 py-2 bg-stone-50 border border-stone-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                 />
               </div>
