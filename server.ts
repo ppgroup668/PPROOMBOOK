@@ -495,6 +495,11 @@ app.get('/api/system/schema-docs', (_req: Request, res: Response) => {
   return res.json(SCHEMA_DOCS);
 });
 
+// Explicit 404 handler for API routes so it never falls through to Vite HTML
+app.all('/api/*', (req: Request, res: Response) => {
+  res.status(404).json({ error: `找不到此 API 端點: ${req.method} ${req.path}` });
+});
+
 // ==========================================
 // 6. Vite Integration / Static Assets
 // ==========================================

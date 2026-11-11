@@ -20,11 +20,32 @@ async function fetchJson<T>(url: string, options: RequestInit = {}): Promise<T> 
     headers.set('Authorization', `Bearer ${token}`);
   }
 
-  const response = await fetch(url, { ...options, headers });
-  const data = await response.json();
+  let response: Response;
+  try {
+    response = await fetch(url, { ...options, headers });
+  } catch (err: any) {
+    throw new Error('伺服器連線中斷或網路異常，請稍後再試');
+  }
+
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    const text = await response.text().catch(() => '');
+    if (!response.ok) {
+      throw new Error(`伺服器暫時無法處理請求 (${response.status})，請重新登入或稍後再試`);
+    }
+    // If somehow a 200 returned HTML
+    throw new Error('伺服器回應格式異常');
+  }
+
+  let data: any;
+  try {
+    data = await response.json();
+  } catch (_e) {
+    throw new Error('回應資料格式解析失敗，請稍後重試');
+  }
 
   if (!response.ok) {
-    throw new Error(data.error || '請求失敗，請稍後再試');
+    throw new Error(data?.error || `請求失敗 (${response.status})，請確認輸入資料`);
   }
 
   return data as T;

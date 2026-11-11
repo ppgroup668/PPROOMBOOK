@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'bg-stone-800 hover:bg-stone-700 text-stone-300'
             }`}
           >
-            一鍵登入管理員
+            一鍵登入管理員 (ppgroup668)
           </button>
           {currentUser && (
             <button

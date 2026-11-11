@@ -100,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onQuickLogin('admin')}
                   className="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-purple-300 text-left transition font-medium"
                 >
-                  切換為管理員 (admin@bookla.com)
+                  切換為管理員 (ppgroup668@gmail.com)
                 </button>
               </div>
             </div>

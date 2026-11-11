@@ -57,7 +57,7 @@ const DB_FILE = path.join(DATA_DIR, 'database.json');
 
 // Default initial data
 function getDefaultData(): DatabaseData {
-  const adminPasswordHash = bcrypt.hashSync('admin123', 10);
+  const adminPasswordHash = bcrypt.hashSync('668668', 10);
   const memberPasswordHash = bcrypt.hashSync('user123', 10);
 
   const now = new Date().toISOString();
@@ -76,7 +76,7 @@ function getDefaultData(): DatabaseData {
     {
       id: 'usr_admin',
       name: '系統管理員 (Admin)',
-      email: 'admin@bookla.com',
+      email: 'ppgroup668@gmail.com',
       phone: '0912-345-678',
       passwordHash: adminPasswordHash,
       role: 'admin',
@@ -298,8 +298,8 @@ class Database {
     return this.data.users.find(u => {
       const uEmail = u.email.toLowerCase();
       if (uEmail === q) return true;
-      if ((q === 'admin@bookla.com' || q === 'admin@bookjor.com') && (uEmail === 'admin@bookla.com' || uEmail === 'admin@bookjor.com')) {
-        return true;
+      if (q === 'admin@bookla.com' || q === 'admin@bookjor.com' || q === 'admin@gmail.com') {
+        if (u.role === 'admin') return true;
       }
       return false;
     });

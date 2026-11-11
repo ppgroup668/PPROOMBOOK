@@ -3,9 +3,9 @@
     {
       "id": "usr_admin",
       "name": "系統管理員 (Admin)",
-      "email": "admin@bookla.com",
+      "email": "ppgroup668@gmail.com",
       "phone": "0912-345-678",
-      "passwordHash": "$2b$10$rEgZh6yspCp5BLOWPJs27eGoneOzd5hsmQeKB34CiDxQD4/xnIzBS",
+      "passwordHash": "$2b$10$ab2aqgiyxcJpz2XBfn.O5uhDiAI/24RXODq75bfUH9JtDfk5vqseC",
       "role": "admin",
       "createdAt": "2026-11-11T07:00:18.619Z"
     },

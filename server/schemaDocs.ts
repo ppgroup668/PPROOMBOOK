@@ -186,9 +186,9 @@ export const Booking = mongoose.model<IBooking>('Booking', BookingSchema);
 
 【預設系統帳號】
 - 管理員帳號 (Admin)：
-  帳號：admin@bookla.com
-  密碼：admin123
-  權限：房型新增/編輯/下架、預約全表審核與手動調度
+  帳號：ppgroup668@gmail.com
+  密碼：668668
+  權限：會議室新增/編輯/下架、預約全表審核與手動調度
 - 一般會員帳號 (Member)：
   帳號：user@example.com
   密碼：user123

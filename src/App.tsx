@@ -87,8 +87,8 @@ export default function App() {
   // Quick Login helper
   const handleQuickLogin = async (role: 'admin' | 'member') => {
     try {
-      const email = role === 'admin' ? 'admin@bookla.com' : 'user@example.com';
-      const password = role === 'admin' ? 'admin123' : 'user123';
+      const email = role === 'admin' ? 'ppgroup668@gmail.com' : 'user@example.com';
+      const password = role === 'admin' ? '668668' : 'user123';
       const res = await api.login({ email, password });
       authStorage.setToken(res.token);
       setCurrentUser(res.user);
@@ -117,7 +117,7 @@ export default function App() {
     }
     if (view === 'admin' && currentUser?.role !== 'admin') {
       // Auto assist user to switch to admin test or show prompt
-      if (confirm('此功能需管理員權限，是否立即以測試管理員帳號 (admin@bookla.com) 登入？')) {
+      if (confirm('此功能需管理員權限，是否立即以測試管理員帳號 (ppgroup668@gmail.com / 密碼: 668668) 登入？')) {
         handleQuickLogin('admin');
         return;
       }
