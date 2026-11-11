@@ -20,7 +20,7 @@ import {
   Clock,
   Sparkles
 } from 'lucide-react';
-import { User, Room, Booking, AdminStats, SchemaDocs } from '../types.ts';
+import { User, Room, Booking, AdminStats } from '../types.ts';
 import { api } from '../api.ts';
 
 interface AdminDashboardProps {
@@ -28,7 +28,7 @@ interface AdminDashboardProps {
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) => {
-  const [activeTab, setActiveTab] = useState<'rooms' | 'bookings' | 'stats' | 'schema'>('bookings');
+  const [activeTab, setActiveTab] = useState<'rooms' | 'bookings' | 'stats'>('bookings');
 
   // Stats State
   const [stats, setStats] = useState<AdminStats | null>(null);
@@ -41,22 +41,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
 
   // Room Form State
   const [formName, setFormName] = useState('');
-  const [formCategory, setFormCategory] = useState('暗室沖印');
+  const [formCategory, setFormCategory] = useState('高階會議室');
   const [formDescription, setFormDescription] = useState('');
-  const [formCapacity, setFormCapacity] = useState('4');
-  const [formArea, setFormArea] = useState('25 平方米');
-  const [formAmenities, setFormAmenities] = useState('');
-  const [formImageUrl, setFormImageUrl] = useState('');
+  const [formCapacity, setFormCapacity] = useState('10');
+  const [formArea, setFormArea] = useState('35 平方米');
+  const [formAmenities, setFormAmenities] = useState('4K 觸控白板, 視訊會議系統, 無線投影, 高速 Wi-Fi');
+  const [formImageUrl, setFormImageUrl] = useState('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80');
   const [formStatus, setFormStatus] = useState<Room['status']>('available');
 
   // Bookings State
   const [adminBookings, setAdminBookings] = useState<Booking[]>([]);
   const [bookingStatusFilter, setBookingStatusFilter] = useState<string>('all');
   const [bookingSearch, setBookingSearch] = useState<string>('');
-
-  // Schema Docs State
-  const [schemaDocs, setSchemaDocs] = useState<SchemaDocs | null>(null);
-  const [copiedSection, setCopiedSection] = useState<string | null>(null);
 
   // UI state
   const [loading, setLoading] = useState<boolean>(false);
@@ -93,18 +89,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
     }
   };
 
-  const loadSchema = async () => {
-    try {
-      const res = await api.getSchemaDocs();
-      setSchemaDocs(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const refreshAll = async () => {
     setLoading(true);
-    await Promise.all([loadStats(), loadRooms(), loadBookings(), loadSchema()]);
+    await Promise.all([loadStats(), loadRooms(), loadBookings()]);
     setLoading(false);
   };
 
@@ -134,12 +121,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
   const openCreateRoom = () => {
     setEditingRoom(null);
     setFormName('');
-    setFormCategory('暗室沖印');
+    setFormCategory('高階會議室');
     setFormDescription('');
-    setFormCapacity('4');
-    setFormArea('25 平方米');
-    setFormAmenities('放大機, 沖洗槽, 紅光燈, 抽氣設備');
-    setFormImageUrl('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&q=80');
+    setFormCapacity('10');
+    setFormArea('35 平方米');
+    setFormAmenities('4K 觸控白板, 視訊會議系統, 無線投影, 高速 Wi-Fi');
+    setFormImageUrl('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80');
     setFormStatus('available');
     setIsCreatingRoom(true);
   };
@@ -249,11 +236,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
     }
   };
 
-  const copyToClipboard = (text: string, sectionKey: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedSection(sectionKey);
-    setTimeout(() => setCopiedSection(null), 2000);
-  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -391,18 +373,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
         >
           <BarChart3 className="w-4 h-4 text-emerald-600" />
           預約熱門分析
-        </button>
-
-        <button
-          onClick={() => setActiveTab('schema')}
-          className={`px-4 py-2.5 rounded-t-xl text-sm font-bold transition flex items-center gap-2 whitespace-nowrap cursor-pointer ${
-            activeTab === 'schema'
-              ? 'bg-white text-stone-900 border-t-2 border-stone-900 shadow-xs'
-              : 'text-stone-500 hover:text-stone-900'
-          }`}
-        >
-          <Database className="w-4 h-4 text-amber-600" />
-          資料庫 Schema 與部屬指南
         </button>
       </div>
 
@@ -545,7 +515,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
       )}
 
       {/* ============================================================== */}
-      {/* TAB 2: ROOM MANAGEMENT (房型與暗室管理) */}
+      {/* TAB 2: ROOM MANAGEMENT (會議室空間管理) */}
       {/* ============================================================== */}
       {activeTab === 'rooms' && (
         <div className="space-y-6">
@@ -653,7 +623,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
               <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-stone-200">
                   <h3 className="text-xl font-bold text-stone-900">
-                    {isCreatingRoom ? '新增房型／暗室' : `編輯房型：${editingRoom?.name}`}
+                    {isCreatingRoom ? '新增會議室' : `編輯會議室：${editingRoom?.name}`}
                   </h3>
                   <button
                     onClick={() => {
@@ -670,14 +640,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-stone-700 block mb-1">
-                        房型空間名稱 *
+                        會議室名稱 *
                       </label>
                       <input
                         type="text"
                         required
                         value={formName}
                         onChange={(e) => setFormName(e.target.value)}
-                        placeholder="例如：銀鹽日光專業暗室"
+                        placeholder="例如：會議室 F"
                         className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs focus:outline-hidden focus:border-stone-400"
                       />
                     </div>
@@ -691,11 +661,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
                         onChange={(e) => setFormCategory(e.target.value)}
                         className="w-full px-3 py-2 bg-stone-50 border border-stone-200 rounded-xl text-xs focus:outline-hidden"
                       >
-                        <option value="暗室沖印">暗室沖印</option>
-                        <option value="專業會議室">專業會議室</option>
-                        <option value="音訊與直播">音訊與直播</option>
-                        <option value="獨立工作室">獨立工作室</option>
-                        <option value="多功能展演">多功能展演</option>
+                        <option value="高階會議室">高階會議室</option>
+                        <option value="專案會議室">專案會議室</option>
+                        <option value="小組討論室">小組討論室</option>
+                        <option value="視訊會議室">視訊會議室</option>
+                        <option value="大型多功能室">大型多功能室</option>
                       </select>
                     </div>
                   </div>
@@ -814,9 +784,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
       {activeTab === 'stats' && stats && (
         <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 space-y-6">
           <div>
-            <h2 className="text-lg font-bold text-stone-900">各空間預約次數排行榜</h2>
+            <h2 className="text-lg font-bold text-stone-900">各會議室預約次數排行榜</h2>
             <p className="text-xs text-stone-500">
-              即時統計各房型與暗室之有效預約總數與利用分佈
+              即時統計各會議室之有效預約總數與利用分佈
             </p>
           </div>
 
@@ -851,84 +821,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ currentUser }) =
                   );
                 })
             )}
-          </div>
-        </div>
-      )}
-
-      {/* ============================================================== */}
-      {/* TAB 4: SCHEMA & DEPLOYMENT GUIDE (架構與部屬指南) */}
-      {/* ============================================================== */}
-      {activeTab === 'schema' && schemaDocs && (
-        <div className="space-y-6">
-          <div className="bg-white rounded-3xl border border-stone-200 p-6 sm:p-8 shadow-xs space-y-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200 mb-2">
-                <Database className="w-3.5 h-3.5 text-amber-600" />
-                管理者專用技術規格
-              </div>
-              <h2 className="text-xl font-bold text-stone-900">{schemaDocs.title}</h2>
-              <p className="text-xs text-stone-600 mt-1">{schemaDocs.description}</p>
-            </div>
-
-            {/* Section 1: SQLite */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-                  <Database className="w-4 h-4 text-emerald-600" />
-                  1. SQLite 關聯式資料庫結構 (DDL)
-                </h3>
-                <button
-                  onClick={() => copyToClipboard(schemaDocs.sqliteDDL, 'sqlite')}
-                  className="px-3 py-1 rounded-lg border border-stone-200 bg-stone-50 hover:bg-stone-100 text-xs font-medium text-stone-700 flex items-center gap-1 transition cursor-pointer"
-                >
-                  {copiedSection === 'sqlite' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copiedSection === 'sqlite' ? '已複製 DDL' : '複製 SQLite DDL'}
-                </button>
-              </div>
-              <pre className="p-4 bg-stone-900 text-stone-100 rounded-2xl text-xs overflow-x-auto font-mono leading-relaxed max-h-72">
-                {schemaDocs.sqliteDDL}
-              </pre>
-            </div>
-
-            {/* Section 2: MongoDB */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-                  <Database className="w-4 h-4 text-emerald-600" />
-                  2. MongoDB (Mongoose) 結構與串接範例
-                </h3>
-                <button
-                  onClick={() => copyToClipboard(schemaDocs.mongoSchema, 'mongo')}
-                  className="px-3 py-1 rounded-lg border border-stone-200 bg-stone-50 hover:bg-stone-100 text-xs font-medium text-stone-700 flex items-center gap-1 transition cursor-pointer"
-                >
-                  {copiedSection === 'mongo' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copiedSection === 'mongo' ? '已複製 Mongoose' : '複製 Mongoose Schema'}
-                </button>
-              </div>
-              <pre className="p-4 bg-stone-900 text-stone-100 rounded-2xl text-xs overflow-x-auto font-mono leading-relaxed max-h-72">
-                {schemaDocs.mongoSchema}
-              </pre>
-            </div>
-
-            {/* Section 3: Deployment */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-                  <FileText className="w-4 h-4 text-blue-600" />
-                  3. 專案啟動與部屬步驟說明
-                </h3>
-                <button
-                  onClick={() => copyToClipboard(schemaDocs.deploymentGuide, 'deploy')}
-                  className="px-3 py-1 rounded-lg border border-stone-200 bg-stone-50 hover:bg-stone-100 text-xs font-medium text-stone-700 flex items-center gap-1 transition cursor-pointer"
-                >
-                  {copiedSection === 'deploy' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copiedSection === 'deploy' ? '已複製手冊' : '複製部屬手冊'}
-                </button>
-              </div>
-              <pre className="p-4 bg-stone-900 text-stone-100 rounded-2xl text-xs overflow-x-auto font-mono leading-relaxed max-h-72">
-                {schemaDocs.deploymentGuide}
-              </pre>
-            </div>
           </div>
         </div>
       )}

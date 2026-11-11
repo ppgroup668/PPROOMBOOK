@@ -1,16 +1,14 @@
 import React from 'react';
-import { Building2, Sparkles, Database, ShieldCheck, Heart } from 'lucide-react';
+import { Building2, Sparkles, ShieldCheck, Heart } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (view: 'home' | 'member' | 'admin') => void;
-  onOpenSchemaDocs: () => void;
-  onQuickLogin: (role: 'admin' | 'member') => void;
+  onOpenAuth: (mode?: 'login' | 'register') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onNavigate,
-  onOpenSchemaDocs,
-  onQuickLogin,
+  onOpenAuth,
 }) => {
   return (
     <footer className="bg-stone-900 text-stone-300 border-t border-stone-800">
@@ -46,15 +44,15 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => onNavigate('home')}
-                  className="hover:text-white transition"
+                  className="hover:text-white transition cursor-pointer"
                 >
-                  探索所有空間與房型
+                  探索所有空間與會議室
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('member')}
-                  className="hover:text-white transition"
+                  className="hover:text-white transition cursor-pointer"
                 >
                   會員中心與歷史預約
                 </button>
@@ -62,45 +60,36 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => onNavigate('admin')}
-                  className="hover:text-white transition flex items-center gap-1 text-purple-300 hover:text-purple-200"
+                  className="hover:text-white transition flex items-center gap-1 text-purple-300 hover:text-purple-200 cursor-pointer"
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
                   管理員總控台 (Admin)
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={onOpenSchemaDocs}
-                  className="hover:text-white transition flex items-center gap-1 text-emerald-300 hover:text-emerald-200"
-                >
-                  <Database className="w-3.5 h-3.5" />
-                  資料庫 Schema 與部屬指南
-                </button>
-              </li>
             </ul>
           </div>
 
-          {/* Quick Test Demo */}
+          {/* Member & Auth Links */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-stone-200 mb-3">
-              快速體驗切換
+              帳號服務
             </h4>
-            <div className="space-y-2 text-xs">
-              <p className="text-stone-400 text-[11px]">
-                評估專用一鍵快捷登入：
+            <div className="space-y-2 text-xs text-stone-400">
+              <p className="text-[11px] text-stone-400 leading-relaxed">
+                支援全功能個人會員預約與管理者空間審核總控。
               </p>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 pt-1">
                 <button
-                  onClick={() => onQuickLogin('member')}
-                  className="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 text-left transition font-medium"
+                  onClick={() => onOpenAuth('login')}
+                  className="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 text-left transition font-medium cursor-pointer"
                 >
-                  切換為一般會員 (user@example.com)
+                  會員 / 管理員登入
                 </button>
                 <button
-                  onClick={() => onQuickLogin('admin')}
-                  className="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-purple-300 text-left transition font-medium"
+                  onClick={() => onOpenAuth('register')}
+                  className="px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 text-left transition font-medium cursor-pointer"
                 >
-                  切換為管理員 (ppgroup668@gmail.com)
+                  建立新會員帳號
                 </button>
               </div>
             </div>

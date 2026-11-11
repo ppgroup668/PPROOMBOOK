@@ -7,7 +7,6 @@ import { BookingModal } from './components/BookingModal.tsx';
 import { MemberDashboard } from './components/MemberDashboard.tsx';
 import { AdminDashboard } from './components/AdminDashboard.tsx';
 import { AuthModal } from './components/AuthModal.tsx';
-import { SchemaDocsModal } from './components/SchemaDocsModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { User, Room, Booking } from './types.ts';
 import { api, authStorage } from './api.ts';
@@ -26,12 +25,15 @@ export default function App() {
   const [detailRoom, setDetailRoom] = useState<Room | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
   const [authInitialMode, setAuthInitialMode] = useState<'login' | 'register'>('login');
-  const [schemaModalOpen, setSchemaModalOpen] = useState<boolean>(false);
 
   const roomsSectionRef = useRef<HTMLDivElement>(null);
 
   // Check login state on mount
   useEffect(() => {
+    const cached = authStorage.getUser();
+    if (cached) {
+      setCurrentUser(cached);
+    }
     const token = authStorage.getToken();
     if (token) {
       api.getMe()
@@ -39,8 +41,10 @@ export default function App() {
           setCurrentUser(res.user);
         })
         .catch(() => {
-          authStorage.clearToken();
-          setCurrentUser(null);
+          if (!cached) {
+            authStorage.clearToken();
+            setCurrentUser(null);
+          }
         });
     }
   }, []);
@@ -84,25 +88,6 @@ export default function App() {
     });
   }, [rooms, selectedCategory, searchQuery]);
 
-  // Quick Login helper
-  const handleQuickLogin = async (role: 'admin' | 'member') => {
-    try {
-      const email = role === 'admin' ? 'ppgroup668@gmail.com' : 'user@example.com';
-      const password = role === 'admin' ? '668668' : 'user123';
-      const res = await api.login({ email, password });
-      authStorage.setToken(res.token);
-      setCurrentUser(res.user);
-
-      if (role === 'admin') {
-        setActiveView('admin');
-      } else {
-        setActiveView('member');
-      }
-    } catch (err: any) {
-      alert(err.message || '快捷登入失敗');
-    }
-  };
-
   const handleLogout = () => {
     authStorage.clearToken();
     setCurrentUser(null);
@@ -116,11 +101,8 @@ export default function App() {
       return;
     }
     if (view === 'admin' && currentUser?.role !== 'admin') {
-      // Auto assist user to switch to admin test or show prompt
-      if (confirm('此功能需管理員權限，是否立即以測試管理員帳號 (ppgroup668@gmail.com / 密碼: 668668) 登入？')) {
-        handleQuickLogin('admin');
-        return;
-      }
+      setAuthInitialMode('login');
+      setAuthModalOpen(true);
       return;
     }
     setActiveView(view);
@@ -142,9 +124,7 @@ export default function App() {
           setAuthInitialMode(mode);
           setAuthModalOpen(true);
         }}
-        onOpenSchemaDocs={() => setSchemaModalOpen(true)}
         onLogout={handleLogout}
-        onQuickLogin={handleQuickLogin}
       />
 
       {/* Main Views */}
@@ -289,8 +269,10 @@ export default function App() {
       {/* Footer */}
       <Footer
         onNavigate={handleNavigate}
-        onOpenSchemaDocs={() => setSchemaModalOpen(true)}
-        onQuickLogin={handleQuickLogin}
+        onOpenAuth={(mode = 'login') => {
+          setAuthInitialMode(mode);
+          setAuthModalOpen(true);
+        }}
       />
 
       {/* MODAL 1: Detail Modal */}
@@ -339,13 +321,7 @@ export default function App() {
               setActiveView('member');
             }
           }}
-          onQuickLogin={handleQuickLogin}
         />
-      )}
-
-      {/* MODAL 4: Database Schema & Deployment Guide Modal */}
-      {schemaModalOpen && (
-        <SchemaDocsModal onClose={() => setSchemaModalOpen(false)} />
       )}
     </div>
   );

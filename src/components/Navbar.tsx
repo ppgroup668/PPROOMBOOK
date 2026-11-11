@@ -18,9 +18,7 @@ interface NavbarProps {
   activeView: 'home' | 'member' | 'admin';
   onNavigate: (view: 'home' | 'member' | 'admin') => void;
   onOpenAuth: (mode?: 'login' | 'register') => void;
-  onOpenSchemaDocs: () => void;
   onLogout: () => void;
-  onQuickLogin: (role: 'admin' | 'member') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -28,15 +26,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeView,
   onNavigate,
   onOpenAuth,
-  onOpenSchemaDocs,
   onLogout,
-  onQuickLogin,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 border-b border-stone-200 shadow-xs transition-all">
-      {/* Top Demo Shortcut Bar */}
+      {/* Top Status Bar */}
       <div className="bg-stone-900 text-stone-200 text-xs px-4 py-1.5 flex flex-wrap items-center justify-between gap-2 border-b border-stone-800">
         <div className="flex items-center gap-2">
           <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -45,38 +41,33 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span className="text-amber-300 font-semibold flex items-center gap-1">
             <Sparkles className="w-3 h-3" /> 預約全額免費
           </span>
+          <span className="hidden md:inline text-stone-500">|</span>
+          <span className="text-stone-400 hidden md:inline">會議室 A 至 會議室 E 即時預約中</span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-stone-400 hidden md:inline">快速切換測試身分：</span>
-          <button
-            onClick={() => onQuickLogin('member')}
-            className={`px-2 py-0.5 rounded text-xs transition font-medium ${
-              currentUser?.role === 'member'
-                ? 'bg-blue-600 text-white'
-                : 'bg-stone-800 hover:bg-stone-700 text-stone-300'
-            }`}
-          >
-            一鍵登入會員
-          </button>
-          <button
-            onClick={() => onQuickLogin('admin')}
-            className={`px-2 py-0.5 rounded text-xs transition font-medium ${
-              currentUser?.role === 'admin'
-                ? 'bg-purple-600 text-white'
-                : 'bg-stone-800 hover:bg-stone-700 text-stone-300'
-            }`}
-          >
-            一鍵登入管理員 (ppgroup668)
-          </button>
-          {currentUser && (
-            <button
-              onClick={onLogout}
-              className="text-stone-400 hover:text-white text-xs ml-1 flex items-center gap-0.5"
-              title="登出當前身分"
-            >
-              <LogOut className="w-3 h-3" /> 登出
-            </button>
+        <div className="flex items-center gap-3">
+          {currentUser ? (
+            <div className="flex items-center gap-2">
+              <span className="text-stone-300 text-xs flex items-center gap-1">
+                <span className="text-emerald-400">●</span> 已登入：{currentUser.name}
+              </span>
+              <button
+                onClick={onLogout}
+                className="text-stone-400 hover:text-white text-xs ml-1 flex items-center gap-0.5 px-2 py-0.5 rounded bg-stone-800 hover:bg-stone-700 transition cursor-pointer"
+                title="登出帳號"
+              >
+                <LogOut className="w-3 h-3" /> 登出
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => onOpenAuth('login')}
+                className="text-stone-300 hover:text-white text-xs underline underline-offset-2 transition cursor-pointer"
+              >
+                會員 / 管理員登入
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -145,15 +136,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               管理員後台
             </button>
           )}
-
-          <button
-            onClick={onOpenSchemaDocs}
-            className="px-3.5 py-2 rounded-lg text-sm font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition flex items-center gap-1.5"
-            title="查看 SQLite / MongoDB 架構與部屬說明"
-          >
-            <Database className="w-4 h-4 text-emerald-600" />
-            資料庫架構 & 部屬
-          </button>
         </nav>
 
         {/* Desktop User Section */}
@@ -281,17 +263,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 管理員控制台 (Admin)
               </button>
             )}
-
-            <button
-              onClick={() => {
-                onOpenSchemaDocs();
-                setMobileMenuOpen(false);
-              }}
-              className="px-3 py-2.5 rounded-lg text-left text-sm font-medium text-stone-700 flex items-center gap-2"
-            >
-              <Database className="w-4 h-4 text-emerald-600" />
-              資料庫架構與部屬指引
-            </button>
           </div>
 
           <div className="pt-3 border-t border-stone-200">

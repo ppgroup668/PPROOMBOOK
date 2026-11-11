@@ -57,11 +57,3 @@ export interface AdminStats {
   totalMembers: number;
   roomBookingCounts: Record<string, number>;
 }
-
-export interface SchemaDocs {
-  title: string;
-  description: string;
-  sqliteDDL: string;
-  mongoSchema: string;
-  deploymentGuide: string;
-}

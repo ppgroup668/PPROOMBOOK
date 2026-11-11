@@ -215,7 +215,7 @@ export const MemberDashboard: React.FC<MemberDashboardProps> = ({
             <div>
               <p className="text-sm font-semibold text-stone-700">目前尚無相符的預約紀錄</p>
               <p className="text-xs text-stone-500 mt-1">
-                您可以隨時挑選感興趣的暗室或多功能空間，享受全免費預約服務。
+                您可以隨時挑選合適的會議室，享受全免費預約服務。
               </p>
             </div>
             <button
