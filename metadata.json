@@ -1,0 +1,6 @@
+{
+  "name": "BookJor 空間預約系統",
+  "description": "一站式全免費場地與房間預約系統，支援即時檔期日曆、會員預約管理與管理員後台。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
